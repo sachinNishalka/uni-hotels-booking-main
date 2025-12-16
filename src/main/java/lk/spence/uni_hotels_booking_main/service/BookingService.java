@@ -27,7 +27,7 @@ public class BookingService {
     private final RestTemplate restTemplate;
 
     // Mapping: hotelId (from Opera) -> Microservice URL
-    @Value("${hotel.service.acr.url:http://localhost:8082}")
+    @Value("${hotel.service.acr.url}")
     private String acrServiceUrl; // Service 1 - for hotelId "ACR"
 
     @Value("${hotel.service.har.url:http://localhost:8083}")
@@ -66,13 +66,13 @@ public class BookingService {
             // Prepare request with correlation ID header
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("X-Correlation-Id", correlationId);
+            // headers.set("X-Correlation-Id", correlationId);
             headers.set("X-Hotel-Id", hotelId); // Additional context for hotel service
 
             // Forward ENTIRE Opera JSON unchanged to hotel microservice
             HttpEntity<JsonNode> entity = new HttpEntity<>(operaJson, headers);
 
-            String endpoint = serviceUrl + "/api/hotel/bookings";
+            String endpoint = serviceUrl;
             log.debug("Forwarding to endpoint: {}", endpoint);
 
             ResponseEntity<BookingResponseDTO> response = restTemplate.exchange(
