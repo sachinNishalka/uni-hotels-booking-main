@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -113,6 +114,16 @@ public class BookingService {
             throw new RuntimeException("Failed to communicate with hotel service: " +
                     e.getMessage());
         }
+    }
+
+//    TODO: get the parameter here
+    public ResponseEntity<String> getBookings(){
+
+//        TODO: write switch statements for each parameter
+        ResponseEntity<String> bookings = restTemplate.getForEntity(acrServiceUrl, String.class);
+
+        return bookings;
+
     }
 
 }

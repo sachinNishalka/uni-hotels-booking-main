@@ -23,7 +23,7 @@ import java.util.UUID;
 @RequestMapping("/api/booking")
 @RequiredArgsConstructor
 @Slf4j
-
+@CrossOrigin
 public class BookingController {
 
     private final BookingService bookingService;
@@ -85,5 +85,12 @@ public class BookingController {
                             "Internal error: " + e.getMessage()));
         }
 
+    }
+
+//    TODO: get the hotel name as a path variable
+    @GetMapping("/bookings")
+    public ResponseEntity<String> getBookings(){
+//        TODO: pass the path variable to here
+        return bookingService.getBookings();
     }
 }
