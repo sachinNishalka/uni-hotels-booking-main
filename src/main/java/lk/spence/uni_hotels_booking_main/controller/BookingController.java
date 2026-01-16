@@ -93,4 +93,10 @@ public class BookingController {
 //        TODO: pass the path variable to here
         return bookingService.getBookings();
     }
+
+//    TODO: here this should be changed with the hotel
+    @GetMapping("/bookings/{id}")
+    public ResponseEntity<String> getBooking(@PathVariable String id){
+        return bookingService.getBooking(id);
+    }
 }

@@ -77,7 +77,7 @@ public class BookingService {
             log.debug("Forwarding to endpoint: {}", endpoint);
 
             ResponseEntity<BookingResponseDTO> response = restTemplate.exchange(
-                    endpoint,
+                    endpoint+"/bookings",
                     HttpMethod.POST,
                     entity,
                     BookingResponseDTO.class);
@@ -120,10 +120,13 @@ public class BookingService {
     public ResponseEntity<String> getBookings(){
 
 //        TODO: write switch statements for each parameter
-        ResponseEntity<String> bookings = restTemplate.getForEntity(acrServiceUrl, String.class);
+        ResponseEntity<String> bookings = restTemplate.getForEntity(acrServiceUrl+"/bookings", String.class);
 
         return bookings;
 
     }
 
+    public ResponseEntity<String> getBooking(String id) {
+       return restTemplate.getForEntity(acrServiceUrl+"/booking/"+id, String.class);
+    }
 }
